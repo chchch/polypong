@@ -40,12 +40,8 @@ $(document).ready(function() {
 	r_keys = ["219","80","79","73","59","76","75","74","190","188","77","78"];
 	l_keys = ["81","87","69","82","65","83","68","70","90","88","67","86"];
 	for(var k=0;k<r_keys.length;k++){
-		var newsoundl = new PSound(9/l_keys.length * (k+1),-1);
-		var newsoundr = new PSound(9/r_keys.length * (k+1),1);
-//		sounds[r_keys[k]] = new PSound(9/r_keys.length * (k+1),1);;
-//		sounds[l_keys[k]] = new PSound(9/r_keys.length * (k+1),-1);;
-		sounds[r_keys[k]] = newsoundr;
-		sounds[l_keys[k]] = newsoundl;
+		sounds[r_keys[k]] = new PSound(9/r_keys.length * (k+1),1);;
+		sounds[l_keys[k]] = new PSound(9/r_keys.length * (k+1),-1);;
 	} 
 	sounds["186"] = sounds["59"];
 
