@@ -40,20 +40,8 @@ $(document).ready(function() {
 	r_keys = ["219","80","79","73","59","76","75","74","190","188","77","78"];
 	l_keys = ["81","87","69","82","65","83","68","70","90","88","67","86"];
 	for(var k=0;k<r_keys.length;k++){
-<<<<<<< HEAD
-		var newsoundl = new PSound(9/l_keys.length * (k+1),-1);
-		var newsoundr = new PSound(9/r_keys.length * (k+1),1);
-//		sounds[r_keys[k]] = new PSound(9/r_keys.length * (k+1),1);;
-//		sounds[l_keys[k]] = new PSound(9/r_keys.length * (k+1),-1);;
-		sounds[r_keys[k]] = newsoundr;
-		sounds[l_keys[k]] = newsoundl;
-=======
-		var newsound = new PSound(9/r_keys.length * (k+1));
-//		sounds[r_keys[k]] = new PSound(9/r_keys.length * (k+1),1);;
-//		sounds[l_keys[k]] = new PSound(9/r_keys.length * (k+1),-1);;
-		sounds[r_keys[k]] = newsound;
-		sounds[l_keys[k]] = newsound;
->>>>>>> gh-pages
+		sounds[r_keys[k]] = new PSound(9/r_keys.length * (k+1),1);;
+		sounds[l_keys[k]] = new PSound(9/r_keys.length * (k+1),-1);;
 	} 
 	sounds["186"] = sounds["59"];
 
@@ -158,7 +146,6 @@ KeyCapture = function(e) {
 
 PSound = function(n,pan) {
 	var sine = []; 
-<<<<<<< HEAD
 	for (var i=0; i<1000;i++) {
 		ii = 0x8000+Math.round(0x7fff*Math.sin(i/n));
 		if(pan == 1) sine.push(0); 
@@ -169,17 +156,6 @@ PSound = function(n,pan) {
 	wave.header.sampleRate = 22000;
 	wave.header.numChannels = 2;
 	wave.header.bitsPerSample = 16;
-=======
-	for (var i=0; i<700;i++) {
-		ii = 128+Math.round(127*Math.sin(i/n));
-//		if(pan == -1) sine.push(ii/10); 
-		sine.push(ii);
-//		if(pan == 1) sine.push(ii/10);
-	}
-	var wave = new RIFFWAVE();
-//	wave.header.sampleRate = 44100;
-//	wave.header.numChannels = 2;
->>>>>>> gh-pages
 	wave.Make(sine);
 	var audio = new Audio(wave.dataURI);
 	return audio;
