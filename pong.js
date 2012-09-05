@@ -281,9 +281,9 @@ PGame = function() {
 		}
 		else {
 			self.instructions.prepend("<div>ENTER to go back</div><br>");
-			self.instructions.show();
 			self.flipper[1].draw();
 			self.flipper[-1].draw();
+			self.instructions.show();
 		}
 	}
 	this.prestart = function(n) {
@@ -502,8 +502,8 @@ PBall = function(cpos,csize,r, c) {
 	   Ctx.fillStyle = radgrad;
 	   Ctx.beginPath();
 		Ctx.arc(pos.x,pos.y,self.r,0,Math.PI*2,true);
-		Ctx.fill();
 		Ctx.closePath();   
+		Ctx.fill();
 	}
 	this.clear = function() {
 		if(self.prev) {
@@ -776,29 +776,33 @@ PFlipper = function(side,w,r,c) {
 		Ctx = self.Ctx;
 		Ctx.save();
 		if(self.side == - 1) { // right flipper
-			Ctx.translate(self.w-self.r,self.r);
+			Ctx.translate(self.w-self.r-1,self.r+1);
 			Ctx.rotate(-angle);
 			Ctx.beginPath();
 			Ctx.arc(0,0,self.r,Math.PI/2,Math.PI*1.5,true);
-			Ctx.lineTo((1.33*self.r)-self.w,-self.r);			
-			Ctx.arc((1.33*self.r)-self.w,-0.66*self.r,0.33*self.r,Math.PI*1.5,Math.PI/2,true);
+			Ctx.lineTo((1.33*self.r)-self.w+1.33,-self.r);			
+			Ctx.arc((1.33*self.r)-self.w+1.33,-0.66*self.r,0.33*self.r,Math.PI*1.5,Math.PI/2,true);
 		}
 		else { // left flipper
-			Ctx.translate(self.r,self.r);
+			Ctx.translate(self.r+1,self.r+1);
 			Ctx.rotate(angle);
 			Ctx.beginPath();
 			Ctx.arc(0,0,self.r,Math.PI/2,Math.PI*1.5);
-			Ctx.lineTo(self.w-(1.33*self.r),-self.r);
-			Ctx.arc(self.w-(1.33*self.r),-0.66*self.r,0.33*self.r,Math.PI*1.5,Math.PI/2);
+			Ctx.lineTo(self.w-(1.33*self.r)-1.33,-self.r);
+			Ctx.arc(self.w-(1.33*self.r)-1.33,-0.66*self.r,0.33*self.r,Math.PI*1.5,Math.PI/2);
 		}
 //		Ctx.fillStyle = self.c;
 		var radgrad = Ctx.createRadialGradient(0,0,self.r/8,0,0,self.w);  
-	   radgrad.addColorStop(0, 'black');  
-	   radgrad.addColorStop(0.1, self.c);
+//	   radgrad.addColorStop(0, 'black');  
+//	   radgrad.addColorStop(0.1, self.c);
+	   radgrad.addColorStop(0, self.c);
+	   radgrad.addColorStop(0.1, 'black');
 //	   radgrad.addColorStop(1, self.c);  
 	   Ctx.fillStyle = radgrad;
-		Ctx.fill();
+	   Ctx.strokeStyle = self.c;
 		Ctx.closePath();
+		Ctx.fill();
+		Ctx.stroke();
 		Ctx.restore();
 	}
 	this.clear = function() {
